@@ -1,0 +1,2875 @@
+-- Intro GUI Settings
+local introGui = Instance.new("ScreenGui")
+introGui.Name = "IntroGui"
+introGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local introFrame = Instance.new("Frame")
+introFrame.Size = UDim2.new(1, 0, 1, 0)
+introFrame.BackgroundColor3 = Color3.new(0, 0, 0)
+introFrame.BackgroundTransparency = 0.2 -- Updated transparency
+introFrame.Parent = introGui
+
+local introText = Instance.new("TextLabel")
+introText.Size = UDim2.new(1, 0, 0.5, 0)
+introText.Position = UDim2.new(0, 0, 0.25, 0)
+introText.Text = "Join discord server:https://discord.com/invite/UzxE5VzMvw"
+introText.TextColor3 = Color3.new(0.5, 0, 0.5) -- Purple
+introText.BackgroundTransparency = 0.5 -- Updated transparency
+introText.BackgroundColor3 = Color3.new(0, 0, 0) -- Updated background color to black
+introText.Font = Enum.Font.SourceSansBold
+introText.TextSize = 24
+introText.Parent = introFrame
+
+-- Fade In Animation
+introFrame:TweenSizeAndPosition(UDim2.new(1, 0, 1, 0), UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Sine, 2, true)
+
+wait(1) -- Wait for 3 seconds
+
+-- Fade Out Animation
+introFrame:TweenSizeAndPosition(UDim2.new(1, 0, 1, 0), UDim2.new(0, 0, 1, 0), Enum.EasingDirection.In, Enum.EasingStyle.Sine, 2, true)
+
+wait(1) -- Wait for 2 seconds
+
+-- Remove Intro GUI
+introGui:Destroy()
+
+local args = {
+    [1] = "OpenPropMenu"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Clea1rTool1s"):FireServer(unpack(args))
+
+
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/miroeramaa/TurtleLib/main/TurtleUiLib.lua"))()
+
+local window = library:Window("Scripts")
+
+window:Label("Fun Commands", Color3.fromRGB(127, 143, 166))
+
+window:Button("Bring Unanchored Things [E]", function()
+local function setupFireServiceScripter()
+    local msg = Instance.new("Message", workspace)
+    msg.Text = "Made By FireServiceScripter"
+    wait(1.8)
+    msg:Destroy()
+
+    print 'Made By FireServiceScripter'
+
+    local UserInputService = game:GetService("UserInputService")
+    local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
+    local Folder = Instance.new("Folder", game:GetService("Workspace"))
+    local Part = Instance.new("Part", Folder)
+    local Attachment1 = Instance.new("Attachment", Part)
+    Part.Anchored = true
+    Part.CanCollide = false
+    Part.Transparency = 1
+    local Updated = Mouse.Hit + Vector3.new(0, 5, 0)
+    local NetworkAccess = coroutine.create(function()
+        settings().Physics.AllowSleep = false
+        while game:GetService("RunService").RenderStepped:Wait() do
+            for _, Players in next, game:GetService("Players"):GetPlayers() do
+                if Players ~= game:GetService("Players").LocalPlayer then
+                    Players.MaximumSimulationRadius = 0 
+                    sethiddenproperty(Players, "SimulationRadius", 0) 
+                end 
+            end
+            game:GetService("Players").LocalPlayer.MaximumSimulationRadius = math.pow(math.huge,math.huge)
+            setsimulationradius(math.huge) 
+        end 
+    end) 
+    coroutine.resume(NetworkAccess)
+
+    local function ForcePart(v)
+        if v:IsA("Part") and v.Anchored == false and v.Parent:FindFirstChild("Humanoid") == nil and v.Parent:FindFirstChild("Head") == nil and v.Name ~= "Handle" then
+            Mouse.TargetFilter = v
+            for _, x in next, v:GetChildren() do
+                if x:IsA("BodyAngularVelocity") or x:IsA("BodyForce") or x:IsA("BodyGyro") or x:IsA("BodyPosition") or x:IsA("BodyThrust") or x:IsA("BodyVelocity") or x:IsA("RocketPropulsion") then
+                    x:Destroy()
+                end
+            end
+            if v:FindFirstChild("Attachment") then
+                v:FindFirstChild("Attachment"):Destroy()
+            end
+            if v:FindFirstChild("AlignPosition") then
+                v:FindFirstChild("AlignPosition"):Destroy()
+            end
+            if v:FindFirstChild("Torque") then
+                v:FindFirstChild("Torque"):Destroy()
+            end
+            v.CanCollide = false
+            local Torque = Instance.new("Torque", v)
+            Torque.Torque = Vector3.new(100000, 100000, 100000)
+            local AlignPosition = Instance.new("AlignPosition", v)
+            local Attachment2 = Instance.new("Attachment", v)
+            Torque.Attachment0 = Attachment2
+            AlignPosition.MaxForce = 9999999999999999
+            AlignPosition.MaxVelocity = math.huge
+            AlignPosition.Responsiveness = 200
+            AlignPosition.Attachment0 = Attachment2 
+            AlignPosition.Attachment1 = Attachment1
+        end
+    end
+
+    for _, v in next, game:GetService("Workspace"):GetDescendants() do
+        ForcePart(v)
+    end
+
+    game:GetService("Workspace").DescendantAdded:Connect(function(v)
+        ForcePart(v)
+    end)
+
+    UserInputService.InputBegan:Connect(function(Key, Chat)
+        if Key.KeyCode == Enum.KeyCode.E and not Chat then
+            Updated = Mouse.Hit + Vector3.new(0, 5, 0)
+        end
+    end)
+
+    spawn(function()
+        while game:GetService("RunService").RenderStepped:Wait() do
+            Attachment1.WorldCFrame = Updated
+        end
+    end)
+end
+
+-- Call the function to set up FireServiceScripter
+setupFireServiceScripter()
+end)
+
+window:Button("Instantly Kill All v1", function()
+game.Players.LocalPlayer.Character.Head:Remove()for l=1,2 do local t=game.ReplicatedStorage.RemoteEvents.P1layerTriggerEvent54444;for l,m in pairs(game.Players:GetPlayers())do if m.Name~=game.Players.LocalPlayer then t:FireServer("Client2Client","Request: Piggyback!",m)local t=game.ReplicatedStorage.RemoteEvents.P1layerTriggerEvent54444;for l,m in pairs(game.Players:GetPlayers())do if m.Name~=game.Players.LocalPlayer then t:FireServer("BothWantPiggyBackRide",m)end end end end end end)
+
+window:Button("Instantly Kill All v2", function()
+-- Function to teleport players
+local function teleportPlayers()
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            player.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 1
+        end
+    end
+end
+
+-- Execute the teleportation when the script runs
+teleportPlayers()
+
+-- Function to handle mouse input for dragging the GUI
+local function enableDragging(frame)
+    local dragging
+    local dragInput
+    local dragStart
+    local startPos
+
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            dragStart = input.Position
+            startPos = frame.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    frame.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement then
+            dragInput = input
+        end
+    end)
+
+    game:GetService("UserInputService").InputChanged:Connect(function(input)
+        if input == dragInput and dragging then
+            local delta = input.Position - dragStart
+            frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        end
+    end)
+end
+
+-- Remove the GUI button
+game.Players.LocalPlayer.PlayerGui:WaitForChild("TeleportGUI"):Destroy()
+
+-- Make the GUI draggable
+enableDragging(game.Players.LocalPlayer.PlayerGui:WaitForChild("TeleportGUI"))
+
+
+local players = game:GetService("Players"):GetPlayers()
+local args = {
+    [1] = "Client2Client",
+    [2] = "Request: Piggyback!"
+}
+
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local remoteEvent = replicatedStorage:WaitForChild("RE"):WaitForChild("1Playe1rTrigge1rEven1t")
+
+for _, player in ipairs(players) do
+    args[3] = player
+    remoteEvent:FireServer(unpack(args))
+end
+end)
+
+window:Button("Fe invisible", function()
+   local args = {
+    [1] = "CharacterSizeUp",
+    [2] = 9.9999
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Clothe1s"):FireServer(unpack(args))
+end)
+
+window:Button("Fe Scare All Players", function()
+-- Script generated by TurtleSpy, made by Intrer#0421
+
+game:GetService("ReplicatedStorage").RE["1Clea1rTool1s"]:FireServer("ClearAllTools")
+
+-- Script generated by TurtleSpy, made by Intrer#0421
+
+game:GetService("ReplicatedStorage").RE["1Too1l"]:InvokeServer("PickingTools","Glock")
+
+function EquipAllTools(player)
+    -- Get the player's inventory
+    local inventory = player:WaitForChild("Backpack")
+
+    -- Loop through each item in the inventory
+    for _, item in ipairs(inventory:GetChildren()) do
+        -- Check if the item is a tool
+        if item:IsA("Tool") then
+            -- Equip the tool
+            item.Parent = player.Character
+        end
+    end
+end
+
+-- Example usage of the EquipAllTools function
+
+-- Usage Example: Equip all tools in the player's inventory
+local player = game.Players.LocalPlayer
+EquipAllTools(player)
+end)
+
+window:Label("Teleport", Color3.fromRGB(127, 143, 166))
+
+window:Button("Void (SAFE)", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(13.3577147, -29.6223392, -60.9270973, 0.123956509, -0.212897822, -0.96917969, 9.05409636e-10, 0.976712465, -0.214552522, 0.992287636, 0.0265951809, 0.121069863)
+end)
+
+window:Button("Fountain)", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-26.2889729, 19.2692432, 15.2335072, 0.999453902, 5.2560214e-08, 0.0330443345, -5.39778107e-08, 1, 4.200772e-08, -0.0330443345, -4.37684413e-08, 0.999453902)
+end)
+
+window:Button("Police Cams)", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-170.793121, 6.07677698, 25.1310883, 0.453972578, 0, -0.891015649, 0, 1, 0, 0.891015649, 0, 0.453972578)
+end)
+
+window:Button("Sky)", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-21.1493626, 2621.32715, 21.8214645, 0.869963765, -0.362701863, 0.334081441, -0.0445696712, 0.616882801, 0.785792053, -0.491097331, -0.698500514, 0.520500183)
+end)
+
+window:Label("Special Locations", Color3.fromRGB(127, 143, 166))
+
+window:Button("Hospital Secret Lab)", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-324.198822, 16.5862942, 60.9932709, 0.453222275, -4.72993307e-08, -0.891397536, 6.74244021e-08, 1, -1.87807228e-08, 0.891397536, -5.15901064e-08, 0.453222275)
+end)
+
+window:Button("Hospital Secret Room)", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-349.034821, 3.48624992, 97.5106659, -0.997538567, -5.39891936e-08, 0.0701197088, -4.84847114e-08, 1, 8.0203165e-08, -0.0701197088, 7.66060211e-08, -0.997538567)
+end)
+
+window:Button("Agency Room)", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(179.482544, 3.42334962, -401.321625, 0.985828876, 1.69247241e-10, -0.167754084, -3.37144812e-10, 1, -9.72374847e-10, 0.167754084, 1.01515263e-09, 0.985828876)
+end)
+
+
+
+window:Label("More Scripts", Color3.fromRGB(127, 143, 166))
+
+window:Button("Click TP", function()
+mouse = game.Players.LocalPlayer:GetMouse()
+tool = Instance.new("Tool")
+tool.RequiresHandle = false
+tool.Name = "Click TP Tool"
+tool.Activated:connect(function()
+local pos = mouse.Hit+Vector3.new(0,2.5,0)
+pos = CFrame.new(pos.X,pos.Y,pos.Z)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+end)
+tool.Parent = game.Players.LocalPlayer.Backpack
+    end)
+
+window:Button("Invisible Bike", function()
+while true do
+local args = {
+    [1] = "GirlBike"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1NoMoto1rVehicle1s"):FireServer(unpack(args))
+
+local args = {
+    [1] = "NoMotorVehicleDeleteCar"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+
+local args = {
+    [1] = "Delete NoMotorVehicle"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1NoMoto1rVehicle1s"):FireServer(unpack(args))
+
+local args = {
+    [1] = "Bike"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1NoMoto1rVehicle1s"):FireServer(unpack(args))
+
+local args = {
+    [1] = "NoMotorVehicleDeleteCar"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+
+local args = {
+    [1] = "Delete NoMotorVehicle"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1NoMoto1rVehicle1s"):FireServer(unpack(args))
+
+wait(1) 
+end
+end)
+
+window:Toggle("Children Spam", true, function(bool)
+    print(bool) -- bool is true or false depending on the state of the toggle
+    if bool then
+        local ohString1 = "RolePlayFollow"
+        local ohString2 = "LA MAFIA!"
+
+        game:GetService("ReplicatedStorage").RE["1RPNam1eTex1t"]:FireServer(ohString1, ohString2)
+
+        local args = {
+            [1] = "CharacterFollowSpawnPlayer",
+            [2] = "system1x1x1x1_v2"
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Bab1yFollo1w"):FireServer(unpack(args))
+
+        local args = {
+            [1] = "CharacterFollowSpawnPlayer",
+            [2] = "BabyGirl"
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Bab1yFollo1w"):FireServer(unpack(args))
+    end
+end)
+
+window:Button("SUS Sign", function()
+local args = {
+    [1] = "ClearAllTools"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Clea1rTool1s"):FireServer(unpack(args))
+
+local args = {
+    [1] = "PickingTools",
+    [2] = "Sign"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+local player = game:GetService("Players").LocalPlayer
+local backpack = player.Backpack
+
+-- Function to equip all tools in the player's Backpack
+local function equipTools()
+    for _, tool in ipairs(backpack:GetChildren()) do
+        if tool:IsA("Tool") then
+            tool.Parent = player.Character
+        end
+    end
+end
+
+-- Equip tools when the player's character is added
+player.CharacterAdded:Connect(function(character)
+    equipTools()
+end)
+
+-- If the player's character already exists, equip tools immediately
+if player.Character then
+    equipTools()
+end
+
+
+function getNil(name,class) for _,v in next, getnilinstances()do if v.ClassName==class and v.Name==name then return v;end end end
+
+local args = {
+    [1] = "Sign",
+    [2] = "SignWords",
+    [3] = "\210\147\225\180\156\225\180\132\225\180\139\225\180\141\225\180\135\202\153\225\180\128\202\153\202" ..
+        "\143\201\162\201\170\202\128\202\159\ns\225\180\156\225\180\132\225\180\139\225\180\141" ..
+        "\202\143\225\180\133\201\170\225\180\132\225\180\139\n\202\143\225\180\143\225\180\156" ..
+        "\210\147\225\180\156\225\180\132\225\180\139\201\170\201\180\201\162\202\153\201\170\225" ..
+        "\180\155\225\180\132\202\156!"
+}
+
+getNil("ToolSound", "RemoteEvent"):FireServer(unpack(args))
+
+
+function getNil(name,class) for _,v in next, getnilinstances() do if v.ClassName==class and v.Name==name then return v;end end end
+
+local args = {
+    [1] = "Sign",
+    [2] = "SignColor",
+    [3] = getNil("Color", "StringValue")
+}
+
+getNil("ToolSound", "RemoteEvent"):FireServer(unpack(args))
+
+function getNil(name,class) for _,v in next, getnilinstances() do if v.ClassName==class and v.Name==name then return v;end end end
+
+local args = {
+    [1] = "Sign",
+    [2] = "SignColor",
+    [3] = getNil("Color", "StringValue")
+}
+
+getNil("ToolSound", "RemoteEvent"):FireServer(unpack(args))
+
+
+local args = {
+    [1] = "Sign",
+    [2] = "SignWords",
+    [3] = "s\210\147\225\180\156\225\180\132\225\180\139\225\180\141\225\180\135\202\153\225\180\128\202\153\202" ..
+        "\143\201\162\201\170\202\128\202\159\ns\225\180\156\225\180\132\225\180\139\225\180\141" ..
+        "\202\143\225\180\133\201\170\225\180\132\225\180\139\n\202\143\225\180\143\225\180\156" ..
+        "\210\147\225\180\156\225\180\132\225\180\139\201\170\201\180\201\162\202\153\201\170" ..
+        "\225\180\155\225\180\132\202\156!"
+}
+
+game:GetService("Players").LocalPlayer.Character.Sign.ToolSound:FireServer(unpack(args))
+
+
+local args = {
+    [1] = "Sign",
+    [2] = "SignWords",
+    [3] = "s\210\147\225\180\156\225\180\132\225\180\139\225\180\141\225\180\135\202\153\225\180\128\202\153\202" ..
+        "\143\201\162\201\170\202\128\202\159\ns\225\180\156\225\180\132\225\180\139\225\180\141" ..
+        "\202\143\225\180\133\201\170\225\180\132\225\180\139\n\202\143\225\180\143\225\180\156" ..
+        "\210\147\225\180\156\225\180\132\225\180\139\201\170\201\180\201\162\202\153\201\170" ..
+        "\225\180\155\225\180\132\202\156!"
+}
+
+game:GetService("Players").LocalPlayer.Character.Sign.ToolSound:FireServer(unpack(args))
+
+
+local args = {
+    [1] = "Sign",
+    [2] = "SignWords",
+    [3] = "s\210\147\225\180\156\225\180\132\225\180\139\225\180\141\225\180\135\202\153\225\180\128\202\153\202" ..
+        "\143\201\162\201\170\202\128\202\159\ns\225\180\156\225\180\132\225\180\139\225\180\141" ..
+        "\202\143\225\180\133\201\170\225\180\132\225\180\139\n\202\143\225\180\143\225\180\156" ..
+        "\210\147\225\180\156\225\180\132\225\180\139\201\170\201\180\201\162\202\153\201\170" ..
+        "\225\180\155\225\180\132\202\156!"
+}
+
+game:GetService("Players").LocalPlayer.Character.Sign.ToolSound:FireServer(unpack(args))
+end)
+
+local window = library:Window("Avatar")
+
+function ToggleRainbowCharacter(bool)
+    if bool then
+        -- If the toggle is activated, start the rainbow character script.
+        while wait(5) do
+            local args = {
+                [1] = "skintone",
+                [2] = "Really black"
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+            
+            local args = {
+                [1] = "skintone",
+                [2] = "Really blue"
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+            
+            local args = {
+                [1] = "skintone",
+                [2] = "Magenta"
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+            
+            local args = {
+                [1] = "skintone",
+                [2] = "Really red"
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+            
+            local args = {
+                [1] = "skintone",
+                [2] = "Lime green"
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+            
+            local args = {
+                [1] = "skintone",
+                [2] = "New Yeller"
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+        end
+    else
+        -- If the toggle is not activated, stop the rainbow character script.
+        -- You can add any necessary code here to stop the script.
+    end
+end
+
+-- Example usage of the ToggleRainbowCharacter function
+
+-- Usage Example: Call the ToggleRainbowCharacter function with the state of the toggle
+window:Toggle("Rainbow Character", true, function(bool)
+    ToggleRainbowCharacter(bool)
+end)
+
+window:Button("Reset Outfit", function()
+local args = {
+    [1] = "OCA"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Avata1rOrigina1l"):FireServer(unpack(args))
+
+end)
+
+window:Button("Fe Naked", function()
+
+local args = {
+    [1] = "wear",
+    [2] = 9832141312
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+
+local args = {
+    [1] = "wear",
+    [2] = 12211432174
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+
+end)
+
+
+window:Button("1x1x1x1 avatar", function()
+
+local args = {
+    [1] = "OCA"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Avata1rOrigina1l"):FireServer(unpack(args))
+
+local args = {
+    [1] = "skintone",
+    [2] = "Really black"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+
+local args = {
+    [1] = "wear",
+    [2] = 14733189296
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+
+
+local args = {
+    [1] = "wear",
+    [2] = 15741016217
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+
+local args = {
+    [1] = "wear",
+    [2] = 7673371620
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Label("Wear Shirts", Color3.fromRGB(127, 143, 166))
+
+local dropdown = window:Dropdown("Shirts", {"Hacker Shirt", "Tubers93 Shirt", "ANTI-SLENDER", "Trash Kid", "Realistic Abs", "Idk Shirt"}, function(name)
+    if name == "Hacker Shirt" then
+        local args = {
+            [1] = "wear",
+            [2] = 4800479830
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+    elseif name == "Tubers93 Shirt" then
+        local args = {
+            [1] = "wear",
+            [2] = 9415501539
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+    elseif name == "Idk Shirt" then
+        local args = {
+            [1] = "wear",
+            [2] = 4957443828
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+ elseif name == "ANTI-SLENDER" then
+local args = {
+            [1] = "wear",
+            [2] = 5835498585
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+elseif name == "Trash Kid" then
+local args = {
+            [1] = "wear",
+            [2] = 6670159962
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+elseif name == "Realistic Abs" then
+local args = {
+            [1] = "wear",
+            [2] = 10952813901
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+    end
+end)
+
+window:Label("Trolling", Color3.fromRGB(127, 143, 166))
+
+window:Button("Become a Baby!", function()
+local args = {
+    [1] = "CharacterSizeUp",
+    [2] = 9.9999
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Clothe1s"):FireServer(unpack(args))
+
+
+local args = {
+    [1] = "ClearAllTools"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Clea1rTool1s"):FireServer(unpack(args))
+
+
+local args = {
+    [1] = "PickingTools",
+    [2] = "BabyBoy"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+-- Function to equip all tools in the player's inventory
+function EquipAllTools(player)
+    local backpack = player.Backpack
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+
+    -- Loop through each tool in the backpack
+    for _, tool in pairs(backpack:GetChildren()) do
+        -- Check if the item is a tool
+        if tool:IsA("Tool") then
+            -- Equip the tool
+            tool.Parent = character
+            humanoid:EquipTool(tool)
+        end
+    end
+end
+
+-- Call the function for each player that joins the game
+game.Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function(character)
+        EquipAllTools(player)
+    end)
+    -- Call the function immediately for existing players
+    if player.Character then
+        EquipAllTools(player)
+    end
+end)
+
+-- Call the function for existing players when the script runs
+for _, player in ipairs(game.Players:GetPlayers()) do
+    player.CharacterAdded:Connect(function(character)
+        EquipAllTools(player)
+    end)
+    if player.Character then
+        EquipAllTools(player)
+    end
+end
+end)
+
+window:Button("Become a Monkey!", function()
+local args = {
+    [1] = "CharacterSizeUp",
+    [2] = 9.9999
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Clothe1s"):FireServer(unpack(args))
+
+
+local args = {
+    [1] = "ClearAllTools"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Clea1rTool1s"):FireServer(unpack(args))
+
+
+local args = {
+    [1] = "PickingTools",
+    [2] = "BabyMonkey"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+
+-- Function to equip all tools in the player's inventory
+function EquipAllTools(player)
+    local backpack = player.Backpack
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+
+    -- Loop through each tool in the backpack
+    for _, tool in pairs(backpack:GetChildren()) do
+        -- Check if the item is a tool
+        if tool:IsA("Tool") then
+            -- Equip the tool
+            tool.Parent = character
+            humanoid:EquipTool(tool)
+        end
+    end
+end
+
+-- Call the function for each player that joins the game
+game.Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function(character)
+        EquipAllTools(player)
+    end)
+    -- Call the function immediately for existing players
+    if player.Character then
+        EquipAllTools(player)
+    end
+end)
+
+-- Call the function for existing players when the script runs
+for _, player in ipairs(game.Players:GetPlayers()) do
+    player.CharacterAdded:Connect(function(character)
+        EquipAllTools(player)
+    end)
+    if player.Character then
+        EquipAllTools(player)
+    end
+end
+end)
+
+window:Button("Become a Box!", function()
+local args = {
+    [1] = "CharacterSizeUp",
+    [2] = 9.9999
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Clothe1s"):FireServer(unpack(args))
+
+
+local args = {
+    [1] = "ClearAllTools"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Clea1rTool1s"):FireServer(unpack(args))
+
+
+local args = {
+    [1] = "PickingTools",
+    [2] = "Box"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+
+-- Function to equip all tools in the player's inventory
+function EquipAllTools(player)
+    local backpack = player.Backpack
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+
+    -- Loop through each tool in the backpack
+    for _, tool in pairs(backpack:GetChildren()) do
+        -- Check if the item is a tool
+        if tool:IsA("Tool") then
+            -- Equip the tool
+            tool.Parent = character
+            humanoid:EquipTool(tool)
+        end
+    end
+end
+
+-- Call the function for each player that joins the game
+game.Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function(character)
+        EquipAllTools(player)
+    end)
+    -- Call the function immediately for existing players
+    if player.Character then
+        EquipAllTools(player)
+    end
+end)
+
+-- Call the function for existing players when the script runs
+for _, player in ipairs(game.Players:GetPlayers()) do
+    player.CharacterAdded:Connect(function(character)
+        EquipAllTools(player)
+    end)
+    if player.Character then
+        EquipAllTools(player)
+    end
+end
+end)
+
+window:Button("Naked TOPG :Breath Air", function()
+local args = {
+    [1] = "OCA"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Avata1rOrigina1l"):FireServer(unpack(args))
+
+wait(3)
+
+local args = {
+    [1] = "wear",
+    [2] = 3134606054
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+
+local args = {
+    [1] = "wear",
+    [2] = 11638635857
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+
+local args = {
+    [1] = "wear",
+    [2] = 12834413252
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+local window = library:Window("Scripts & Server- Side Hats 2 & Spawn Cars")
+
+window:Button("Clown Head", function()
+local args = {
+    [1] = "wear",
+    [2] = 6313026932
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Button("Mouth Head", function()
+local args = {
+    [1] = "wear",
+    [2] = 6532372710
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Button("Psycho Head", function()
+local args = {
+    [1] = "wear",
+    [2] = 7097631761
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Button("Lag Server", function()
+while wait(2) do
+    local args1 = {
+        [1] = "PickingCar",
+        [2] = "Bus"
+    }
+
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args1))
+
+    local args2 = {
+        [1] = "DeleteAllVehicles"
+    }
+
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args2))
+
+    local args3 = {
+        [1] = "PickingCar",
+        [2] = "SchoolBus"
+    }
+
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args3))
+end
+end)
+
+window:Label(" Instant Spawn Cars", Color3.fromRGB(127, 143, 166))
+
+window:Button("Tank", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "Tank"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end) 
+
+window:Button("GarbageTruck", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "GarbageTruck"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("SmartCar", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "SmartCar"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("CopUnderCoverSUP", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "CopUnderCoverSUV"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("Cadillac", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "Cadillac"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+
+window:Button("QuadStock", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "QuadStock"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("FireTruck", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "FireTruck"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("FordGT", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "FordGT"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("OldHummer", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "OldHummer"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("MilitaryTruck", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "MilitaryTruck"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("Jeep", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "Jeep"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("Challenger", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "Challenger"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("PoliceMotorcycle", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "PoliceMotorcycle"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("BullDozer", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "BullDozer"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("Semi", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "Semi"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("Ambulance", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "Ambulance"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("GolfCartElectric2", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "GolfCartElectric2"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("RV", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "RV"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("Bus", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "Bus"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Button("GolfCart", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "GolfCart"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+
+window:Button("Hearse", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "Hearse"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Label("Other Vehicles", Color3.fromRGB(127, 143, 166))
+
+
+window:Button("Horse", function()
+local args = {
+    [1] = "PickingCar",
+    [2] = "Horse"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Ca1r"):FireServer(unpack(args))
+end)
+
+window:Label("Car Speed Max 1000", Color3.fromRGB(127, 143, 166))
+
+window:Box("Car Speed", function(text, focuslost)
+    if focuslost then
+        local speed = tonumber(text) -- Convert the input text to a number
+        if speed then
+            local args = {
+                [1] = "RegPlayerGiveSpeed",
+                [2] = speed -- Update the second element of args with the entered speed
+            }
+
+            game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Player1sCa1r"):FireServer(unpack(args))
+        else
+            print("Invalid input. Please enter a valid number.")
+        end
+    end
+end)
+
+local isToggleActive = false
+local loopCoroutine = nil
+
+window:Toggle("Loop Light", false, function(bool)
+    isToggleActive = bool
+    if bool then
+        startLoop()
+    else
+        stopLoop()
+    end
+end)
+
+function startLoop()
+    loopCoroutine = coroutine.create(function()
+        while isToggleActive do
+            local args = {
+                [1] = "Lights"
+            }
+            game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Player1sCa1r"):FireServer(unpack(args))
+
+            local args = {
+                [1] = "Horn"
+            }
+            game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Player1sCa1r"):FireServer(unpack(args))
+
+            wait(1) -- Wait for 1 second before executing the loop again
+        end
+    end)
+    coroutine.resume(loopCoroutine)
+end
+
+function stopLoop()
+    if loopCoroutine then
+        isToggleActive = false
+        coroutine.yield(loopCoroutine)
+    end
+end
+
+
+local window = library:Window("LocalPlayer & Server-Side Hats")
+
+window:Label("FE SS Hats", Color3.fromRGB(127, 143, 166))
+
+window:Button("Smile head1", function()
+local args = {
+    [1] = "wear",
+    [2] = 6711806832
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Button("Smile Head2", function()
+local args = {
+    [1] = "wear",
+    [2] = 6809319263
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Button("Crown Head", function()
+local args = {
+    [1] = "wear",
+    [2] = 4272833564
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Button("Eye Head", function()
+local args = {
+    [1] = "wear",
+    [2] = 6773734422
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Button("Sus Head", function()
+local args = {
+    [1] = "wear",
+    [2] = 6564572490
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Button("Devil Hat", function()
+local args = {
+    [1] = "wear",
+    [2] = 16148550809
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Button("Hacker Hat", function()
+local args = {
+    [1] = "wear",
+    [2] = 15375441559
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Button("Cat Head", function()
+local args = {
+    [1] = "wear",
+    [2] = 11981692919
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Button("SUS Hat", function()
+local args = {
+    [1] = "wear",
+    [2] = 11736103105
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Button("Clown2 Hat", function()
+local args = {
+    [1] = "wear",
+    [2] = 4272833564
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Button("Negro Hat", function()
+local args = {
+    [1] = "wear",
+    [2] = 13252335608
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Button("Doge Head", function()
+local args = {
+    [1] = "wear",
+    [2] = 151784320
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Button("Hamster Head", function()
+local args = {
+    [1] = "wear",
+    [2] = 6202816754
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+end)
+
+window:Box("Custom Hat", function(text, focuslost)
+    if focuslost then
+        -- Ensure the entered text is a number
+        local newHatID = tonumber(text)
+
+        -- Check if the conversion to a number is successful
+        if newHatID then
+            local args = {
+                [1] = "wear",
+                [2] = newHatID
+            }
+
+            game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Updat1eAvata1r"):FireServer(unpack(args))
+        else
+            print("Invalid input. Please enter a valid ID.")
+        end
+    end
+end)
+
+
+window:Button("Fe Telekines Tool", function()
+-- Press a block to pick it (ignores anchored blocks) (there is a thing called network ownership so you cannot pick it but works on games sometimes like da hood)
+-- Long Press - Flings a block (power is customizable at line 19)
+-- Unequip  - Releases a block
+
+-- Create a ScreenGui to hold the GUI elements
+
+
+Range = "Min" -- "Min" (idk), "Max" (lag), "Default" (fastest)
+
+local BP = Instance.new("BodyPosition")
+BP.maxForce = Vector3.new(math.huge * math.huge, math.huge * math.huge, math.huge * math.huge)
+BP.P = BP.P * 1.1
+
+local BP = Instance.new("BodyPosition")
+BP.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+BP.Position = BP.Position + Vector3.new(0, 0.1, 0)
+
+task.spawn(function()
+game:GetService("RunService").RenderStepped:Connect(function()
+if Range == "Max" then
+sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", 0)
+elseif Range == "Min" then
+sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", 500)
+end
+end)
+end)
+
+local function a(b, c)
+    local d = getfenv(c)
+    local e =
+        setmetatable(
+        {},
+        {__index = function(self, f)
+                if f == "script" then
+                    return b
+                else
+                    return d[f]
+                end
+            end}
+    )
+    setfenv(c, e)
+    return c
+end
+local power = 1000
+local usrinput = game:GetService("UserInputService")
+local g = {}
+local h = Instance.new("Model", game:GetService("Lighting"))
+local i = Instance.new("Tool")
+local j = Instance.new("Part")
+local k = Instance.new("Script")
+local l = Instance.new("LocalScript")
+local m = sethiddenproperty or set_hidden_property
+i.Name = "Telekinesis"
+i.Parent = h
+i.Grip = CFrame.new(0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+i.GripForward = Vector3.new(-0, -1, -0)
+i.GripRight = Vector3.new(0, 0, 1)
+i.GripUp = Vector3.new(1, 0, 0)
+j.Name = "Handle"
+j.Parent = i
+j.CFrame = CFrame.new(-17.2635937, 15.4915619, 46, 0, 1, 0, 1, 0, 0, 0, 0, -1)
+j.Orientation = Vector3.new(0, 180, 90)
+j.Position = Vector3.new(-17.2635937, 15.4915619, 46)
+j.Rotation = Vector3.new(-180, 0, -90)
+j.Color = Color3.new(0.0666667, 0.0666667, 0.0666667)
+j.Transparency = 1
+j.Size = Vector3.new(1, 1.20000005, 1)
+j.BottomSurface = Enum.SurfaceType.Weld
+j.BrickColor = BrickColor.new("Really black")
+j.Material = Enum.Material.Metal
+j.TopSurface = Enum.SurfaceType.Smooth
+j.brickColor = BrickColor.new("Really black")
+k.Name = "LineConnect"
+k.Parent = i
+table.insert(
+    g,
+    a(
+        k,
+        function()
+            wait()
+            local n = script.Part2
+            local o = script.Part1.Value
+            local p = script.Part2.Value
+            local q = script.Par.Value
+            local color = script.Color
+            local r = Instance.new("Part")
+            r.TopSurface = 0
+            r.BottomSurface = 0
+            r.Reflectance = .5
+            r.Name = "Laser"
+            r.Locked = true
+            r.CanCollide = false
+            r.Anchored = true
+            r.formFactor = 0
+            r.Size = Vector3.new(1, 1, 1)
+            local s = Instance.new("BlockMesh")
+            s.Parent = r
+            while true do
+                if n.Value == nil then
+                    break
+                end
+                if o == nil or p == nil or q == nil then
+                    break
+                end
+                if o.Parent == nil or p.Parent == nil then
+                    break
+                end
+                if q.Parent == nil then
+                    break
+                end
+                local t = CFrame.new(o.Position, p.Position)
+                local dist = (o.Position - p.Position).magnitude
+                r.Parent = q
+                r.BrickColor = color.Value.BrickColor
+                r.Reflectance = color.Value.Reflectance
+                r.Transparency = color.Value.Transparency
+                r.CFrame = CFrame.new(o.Position + t.lookVector * dist / 2)
+                r.CFrame = CFrame.new(r.Position, p.Position)
+                s.Scale = Vector3.new(.25, .25, dist)
+                wait()
+            end
+            r:remove()
+            script:remove()
+        end
+    )
+)
+k.Disabled = true
+l.Name = "MainScript"
+l.Parent = i
+table.insert(
+    g,
+    a(
+        l,
+        function()
+            wait()
+            tool = script.Parent
+            lineconnect = tool.LineConnect
+            object = nil
+            mousedown = false
+            found = false
+            BP = Instance.new("BodyPosition")
+            BP.maxForce = Vector3.new(math.huge * math.huge, math.huge * math.huge, math.huge * math.huge)
+            BP.P = BP.P * 2
+            dist = nil
+            point = Instance.new("Part")
+            point.Locked = true
+            point.Anchored = true
+            point.formFactor = 0
+            point.Shape = 0
+            point.BrickColor = BrickColor.Black()
+            point.Size = Vector3.new(1, 1, 1)
+            point.CanCollide = false
+            local s = Instance.new("SpecialMesh")
+            s.MeshType = "Sphere"
+            s.Scale = Vector3.new(.7, .7, .7)
+            s.Parent = point
+            handle = tool.Handle
+            front = tool.Handle
+            color = tool.Handle
+            objval = nil
+            local u = false
+            local v = BP:clone()
+            v.maxForce = Vector3.new(30000, 30000, 30000)
+            function LineConnect(o, p, q)
+                local w = Instance.new("ObjectValue")
+                w.Value = o
+                w.Name = "Part1"
+                local x = Instance.new("ObjectValue")
+                x.Value = p
+                x.Name = "Part2"
+                local y = Instance.new("ObjectValue")
+                y.Value = q
+                y.Name = "Par"
+                local z = Instance.new("ObjectValue")
+                z.Value = color
+                z.Name = "Color"
+                local A = lineconnect:clone()
+                A.Disabled = false
+                w.Parent = A
+                x.Parent = A
+                y.Parent = A
+                z.Parent = A
+                A.Parent = workspace
+                if p == object then
+                    objval = x
+                end
+            end
+            function onButton1Down(B)
+                if mousedown == true then
+                    return
+                end
+                mousedown = true
+                coroutine.resume(
+                    coroutine.create(
+                        function()
+                            local C = point:clone()
+                            C.Parent = tool
+                            LineConnect(front, C, workspace)
+                            while mousedown == true do
+                                C.Parent = tool
+                                if object == nil then
+                                    if B.Target == nil then
+                                        local t = CFrame.new(front.Position, B.Hit.p)
+                                        C.CFrame = CFrame.new(front.Position + t.lookVector * 1000)
+                                    else
+                                        C.CFrame = CFrame.new(B.Hit.p)
+                                    end
+                                else
+                                    LineConnect(front, object, workspace)
+                                    break
+                                end
+                                wait()
+                            end
+                            C:remove()
+                        end
+                    )
+                )
+                while mousedown == true do
+                    if B.Target ~= nil then
+                        local D = B.Target
+                        if D.Anchored == false then
+                            object = D
+                            dist = (object.Position - front.Position).magnitude
+                            break
+                        end
+                    end
+                    wait()
+                end
+                while mousedown == true do
+                    if object.Parent == nil then
+                        break
+                    end
+                    local t = CFrame.new(front.Position, B.Hit.p)
+                    BP.Parent = object
+                    BP.position = front.Position + t.lookVector * dist
+                    wait()
+                end
+                BP:remove()
+                object = nil
+                objval.Value = nil
+            end
+            function onKeyDown(E, B)
+                local E = E:lower()
+                local F = false
+                if E == "q" then
+                    if dist >= 5 then
+                        dist = dist - 10
+                    end
+                end
+                if E == "r" then
+                    if object == nil then
+                        return
+                    end
+                    for G, H in pairs(object:children()) do
+                        if H.className == "BodyGyro" then
+                            return nil
+                        end
+                    end
+                    BG = Instance.new("BodyGyro")
+                    BG.maxTorque = Vector3.new(math.huge, math.huge, math.huge)
+                    BG.cframe = CFrame.new(object.CFrame.p)
+                    BG.Parent = object
+                    repeat
+                        wait()
+                    until object.CFrame == CFrame.new(object.CFrame.p)
+                    BG.Parent = nil
+                    if object == nil then
+                        return
+                    end
+                    for G, H in pairs(object:children()) do
+                        if H.className == "BodyGyro" then
+                            H.Parent = nil
+                        end
+                    end
+                    object.Velocity = Vector3.new(0, 0, 0)
+                    object.RotVelocity = Vector3.new(0, 0, 0)
+                    object.Orientation = Vector3.new(0, 0, 0)
+                end
+                if E == "e" then
+                    dist = dist + 10
+                end
+                if E == "t" then
+                    if dist ~= 10 then
+                        dist = 10
+                    end
+                end
+                if E == "y" then
+                    if dist ~= 200 then
+                        dist = 200
+                    end
+                end
+                if E == "=" then
+                    BP.P = BP.P * 1.5
+                end
+                if E == "-" then
+                    BP.P = BP.P * 0.5
+                end
+            end
+            function onEquipped(B)
+                touched = false
+                uneq = false
+                keymouse = B
+                local I = tool.Parent
+                human = I.Humanoid
+                human.Changed:connect(
+                    function()
+                        if human.Health == 0 then
+                            mousedown = false
+                            uneq = true
+                            touched = false
+                            BP:remove()
+                            point:remove()
+                            tool:remove()
+                        end
+                    end
+                )
+                usrinput.TouchTapInWorld:connect(
+                    function()
+                        if uneq == false then
+                        if touched == false then
+                        onButton1Down(B)
+                        touched = true
+                        elseif touched == true then
+                        touched = false
+                        end
+                        end
+                    end
+                )
+                usrinput.TouchLongPress:connect(function()
+                    if uneq == false then
+                        if dist ~= power then
+                            dist = power
+                        end
+                    end
+                end)
+                B.KeyDown:connect(
+                    function(E)
+                        onKeyDown(E, B)
+                    end
+                )
+                B.Icon = "rbxasset://textures\\GunCursor.png"
+            end
+            tool.Equipped:connect(onEquipped)
+            tool.Unequipped:connect(function() uneq = true touched = false mousedown = false end)
+        end
+    )
+)
+for J, H in pairs(h:GetChildren()) do
+    H.Parent = game:GetService("Players").LocalPlayer.Backpack
+    pcall(
+        function()
+            H:MakeJoints()
+        end
+    )
+end
+h:Destroy()
+for J, H in pairs(g) do
+    spawn(
+        function()
+            pcall(H)
+        end
+    )
+end
+end)
+
+local slider = window:Slider("Sliding Speed", 0, 100, 20, function(value)
+    local player = game.Players.LocalPlayer
+    local character = player.Character
+    local humanoid = character and character:FindFirstChild("Humanoid")
+    
+    if humanoid then
+        humanoid.WalkSpeed = value
+    end
+
+    print("Sliding speed set to: " .. value)
+end)
+
+local slider = window:Slider("Sliding Gravity", 0, 1000, 50, function(value)
+    local player = game.Players.LocalPlayer
+    local character = player.Character
+    local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+
+    if humanoid then
+        humanoid.WalkSpeed = value -- Assuming you still want to use WalkSpeed for sliding speed
+        local adjustedGravity = value / 100 -- Adjust the divisor based on your preference
+        workspace.Gravity = Vector3.new(0, -adjustedGravity * 196.2, 0) -- 196.2 is a default gravity constant
+    end
+
+    print("Sliding gravity set to: " .. value)
+end)
+
+local slider = window:Slider("Jump Power", 0, 100, 50, function(value)
+    local player = game.Players.LocalPlayer
+    local character = player.Character
+    local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+
+    if humanoid then
+        humanoid.WalkSpeed = value -- Assuming you still want to use WalkSpeed for sliding speed
+        humanoid.JumpPower = value -- Set the JumpPower to the slider value
+    end
+
+    print("Jump power set to: " .. value)
+end)
+
+local window = library:Window("Give Tool To Players [warning kick]")
+
+local dropdown = window:Dropdown("Give Yourself a Tool", {"Coke", "Portal Gun", "C4", "FlashLight", "Sign", "ShoppingCart"}, function(name)
+    if name == "Coke" then
+        local args = {
+    [1] = "PickingTools",
+    [2] = "Coke"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+    elseif name == "Portal Gun" then
+    loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-Portal-Gun-6904"))()
+
+    elseif name == "C4" then
+       local args = {
+    [1] = "PickingTools",
+    [2] = "Bomb"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+ elseif name == "FlashLight" then
+local args = {
+    [1] = "PickingTools",
+    [2] = "FlashLight"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+elseif name == "Sign" then
+local args = {
+    [1] = "PickingTools",
+    [2] = "Sign"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+elseif name == "ShoppingCart" then
+local args = {
+    [1] = "PickingTools",
+    [2] = "ShoppingCart"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+end
+end)
+
+window:Button("Give Coca Cola [ALL]", function()
+local args = {
+    [1] = "PickingTools",
+    [2] = "Coke"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+-- This function sends a tool to all players in the server using the FireServer method.
+-- @param toolName: The name of the tool to be given to the players.
+function GiveToolToAllPlayers(toolName)
+    -- Get the Players service
+    local Players = game:GetService("Players")
+    
+    -- Get all players in the server
+    local allPlayers = Players:GetPlayers()
+    
+    -- Loop through each player and give them the tool
+    for _, player in ipairs(allPlayers) do
+        -- Create the arguments table for the FireServer method
+        local args = {
+            [1] = "ToolGiveToServer",
+            [2] = player,
+            [3] = toolName
+        }
+        
+        -- Get the ReplicatedStorage service
+        local ReplicatedStorage = game:GetService("ReplicatedStorage")
+        
+        -- Find the RemoteEvent to fire the server event
+        local remoteEvent = ReplicatedStorage:WaitForChild("RE"):WaitForChild("1Playe1rTrigge1rEven1t")
+        
+        -- Fire the server event with the arguments
+        remoteEvent:FireServer(unpack(args))
+    end
+end
+
+-- Example usage of the GiveToolToAllPlayers function
+
+-- Usage Example: Give the tool "Coke" to all players in the server
+GiveToolToAllPlayers("Coke")
+end)
+
+window:Button("Give PaperBag [ALL][FIXED}", function()
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local playersService = game:GetService("Players")
+
+-- Function to give tool to all players
+local function giveToolToAllPlayers(toolName)
+    local players = playersService:GetPlayers()
+    for _, player in ipairs(players) do
+        local args = {
+            [1] = "ToolGiveToServer",
+            [2] = player,
+            [3] = toolName
+        }
+        replicatedStorage:WaitForChild("RE"):WaitForChild("1Playe1rTrigge1rEven1t"):FireServer(unpack(args))
+        wait(2)  -- Wait for 2 seconds before giving the tool to the next player
+    end
+end
+
+-- Clear all tools
+local clearArgs = {
+    [1] = "ClearAllTools"
+}
+replicatedStorage:WaitForChild("RE"):WaitForChild("1Clea1rTool1s"):FireServer(unpack(clearArgs))
+
+-- Give tool to all players
+local toolArgs = {
+    [1] = "PickingTools",
+    [2] = "Paperbag"
+}
+replicatedStorage:WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(toolArgs))
+
+-- Give tool to all players in the server
+giveToolToAllPlayers("Paperbag")
+end)
+
+window:Button("Give Money [ALL][FIXED}", function()
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local playersService = game:GetService("Players")
+
+-- Function to give tool to all players
+local function giveToolToAllPlayers(toolName)
+    local players = playersService:GetPlayers()
+    for _, player in ipairs(players) do
+        local args = {
+            [1] = "ToolGiveToServer",
+            [2] = player,
+            [3] = toolName
+        }
+        replicatedStorage:WaitForChild("RE"):WaitForChild("1Playe1rTrigge1rEven1t"):FireServer(unpack(args))
+        wait(2)  -- Wait for 2 seconds before giving the tool to the next player
+    end
+end
+
+-- Clear all tools
+local clearArgs = {
+    [1] = "ClearAllTools"
+}
+replicatedStorage:WaitForChild("RE"):WaitForChild("1Clea1rTool1s"):FireServer(unpack(clearArgs))
+
+-- Give tool to all players
+local toolArgs = {
+    [1] = "PickingTools",
+    [2] = "Money"
+}
+replicatedStorage:WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(toolArgs))
+
+-- Give tool to all players in the server
+giveToolToAllPlayers("Money")
+end)
+
+window:Button("Give Glock [ALL][FIXED}", function()
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local playersService = game:GetService("Players")
+
+-- Function to give tool to all players
+local function giveToolToAllPlayers(toolName)
+    local players = playersService:GetPlayers()
+    for _, player in ipairs(players) do
+        local args = {
+            [1] = "ToolGiveToServer",
+            [2] = player,
+            [3] = toolName
+        }
+        replicatedStorage:WaitForChild("RE"):WaitForChild("1Playe1rTrigge1rEven1t"):FireServer(unpack(args))
+        wait(2)  -- Wait for 2 seconds before giving the tool to the next player
+    end
+end
+
+-- Clear all tools
+local clearArgs = {
+    [1] = "ClearAllTools"
+}
+replicatedStorage:WaitForChild("RE"):WaitForChild("1Clea1rTool1s"):FireServer(unpack(clearArgs))
+
+-- Give tool to all players
+local toolArgs = {
+    [1] = "PickingTools",
+    [2] = "Glock"
+}
+replicatedStorage:WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(toolArgs))
+
+-- Give tool to all players in the server
+giveToolToAllPlayers("Glock")
+end)
+
+window:Button("Give Iphone [ALL][FIXED}", function()
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local playersService = game:GetService("Players")
+
+-- Function to give tool to all players
+local function giveToolToAllPlayers(toolName)
+    local players = playersService:GetPlayers()
+    for _, player in ipairs(players) do
+        local args = {
+            [1] = "ToolGiveToServer",
+            [2] = player,
+            [3] = toolName
+        }
+        replicatedStorage:WaitForChild("RE"):WaitForChild("1Playe1rTrigge1rEven1t"):FireServer(unpack(args))
+        wait(2)  -- Wait for 2 seconds before giving the tool to the next player
+    end
+end
+
+-- Clear all tools
+local clearArgs = {
+    [1] = "ClearAllTools"
+}
+replicatedStorage:WaitForChild("RE"):WaitForChild("1Clea1rTool1s"):FireServer(unpack(clearArgs))
+
+-- Give tool to all players
+local toolArgs = {
+    [1] = "PickingTools",
+    [2] = "Iphone"
+}
+replicatedStorage:WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(toolArgs))
+
+-- Give tool to all players in the server
+giveToolToAllPlayers("Iphone")
+end)
+
+window:Button("Give Sign [ALL][FIXED}", function()
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local playersService = game:GetService("Players")
+
+-- Function to give tool to all players
+local function giveToolToAllPlayers(toolName)
+    local players = playersService:GetPlayers()
+    for _, player in ipairs(players) do
+        local args = {
+            [1] = "ToolGiveToServer",
+            [2] = player,
+            [3] = toolName
+        }
+        replicatedStorage:WaitForChild("RE"):WaitForChild("1Playe1rTrigge1rEven1t"):FireServer(unpack(args))
+        wait(2)  -- Wait for 2 seconds before giving the tool to the next player
+    end
+end
+
+-- Clear all tools
+local clearArgs = {
+    [1] = "ClearAllTools"
+}
+replicatedStorage:WaitForChild("RE"):WaitForChild("1Clea1rTool1s"):FireServer(unpack(clearArgs))
+
+-- Give tool to all players
+local toolArgs = {
+    [1] = "PickingTools",
+    [2] = "Sign"
+}
+replicatedStorage:WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(toolArgs))
+
+-- Give tool to all players in the server
+giveToolToAllPlayers("Sign")
+end)
+
+window:Button("Give Laptop [ALL][FIXED}", function()
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local playersService = game:GetService("Players")
+
+-- Function to give tool to all players
+local function giveToolToAllPlayers(toolName)
+    local players = playersService:GetPlayers()
+    for _, player in ipairs(players) do
+        local args = {
+            [1] = "ToolGiveToServer",
+            [2] = player,
+            [3] = toolName
+        }
+        replicatedStorage:WaitForChild("RE"):WaitForChild("1Playe1rTrigge1rEven1t"):FireServer(unpack(args))
+        wait(2)  -- Wait for 2 seconds before giving the tool to the next player
+    end
+end
+
+-- Clear all tools
+local clearArgs = {
+    [1] = "ClearAllTools"
+}
+replicatedStorage:WaitForChild("RE"):WaitForChild("1Clea1rTool1s"):FireServer(unpack(clearArgs))
+
+-- Give tool to all players
+local toolArgs = {
+    [1] = "PickingTools",
+    [2] = "Laptop"
+}
+replicatedStorage:WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(toolArgs))
+
+-- Give tool to all players in the server
+giveToolToAllPlayers("Laptop")
+end)
+
+window:Button("Give Box [ALL][FIXED}", function()
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local playersService = game:GetService("Players")
+
+-- Function to give tool to all players
+local function giveToolToAllPlayers(toolName)
+    local players = playersService:GetPlayers()
+    for _, player in ipairs(players) do
+        local args = {
+            [1] = "ToolGiveToServer",
+            [2] = player,
+            [3] = toolName
+        }
+        replicatedStorage:WaitForChild("RE"):WaitForChild("1Playe1rTrigge1rEven1t"):FireServer(unpack(args))
+        wait(2)  -- Wait for 2 seconds before giving the tool to the next player
+    end
+end
+
+-- Clear all tools
+local clearArgs = {
+    [1] = "ClearAllTools"
+}
+replicatedStorage:WaitForChild("RE"):WaitForChild("1Clea1rTool1s"):FireServer(unpack(clearArgs))
+
+-- Give tool to all players
+local toolArgs = {
+    [1] = "PickingTools",
+    [2] = "Box"
+}
+replicatedStorage:WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(toolArgs))
+
+-- Give tool to all players in the server
+giveToolToAllPlayers("Box")
+end)
+
+window:Label("Give Yourself a Tool", Color3.fromRGB(127, 143, 166))
+
+window:Button("Get All Guns", function()
+local args = {
+    [1] = "PickingTools",
+    [2] = "Sniper"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+local args = {
+    [1] = "PickingTools",
+    [2] = "Assault"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+local args = {
+    [1] = "PickingTools",
+    [2] = "Shotgun"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+local args = {
+    [1] = "PickingTools",
+    [2] = "GlockBrown"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+local args = {
+    [1] = "PickingTools",
+    [2] = "Glock"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+end)
+
+window:Button("Get All Guitars", function()
+local args = {
+    [1] = "PickingTools",
+    [2] = "Guitar"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+local args = {
+    [1] = "PickingTools",
+    [2] = "ElectricGuitar"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+end)
+
+window:Button("Get All Sit Tools", function()
+local args = {
+    [1] = "PickingTools",
+    [2] = "ShoppingCart"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+local args = {
+    [1] = "PickingTools",
+    [2] = "Stroller"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+local args = {
+    [1] = "PickingTools",
+    [2] = "Wagon"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+local args = {
+    [1] = "PickingTools",
+    [2] = "Stretcher"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+local args = {
+    [1] = "PickingTools",
+    [2] = "LawnMower"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+end)
+
+window:Label("Tools", Color3.fromRGB(127, 143, 166))
+
+window:Button("Equip All Tools", function()
+
+function EquipAllTools(player)
+    -- Get the player's inventory
+    local inventory = player:WaitForChild("Backpack")
+
+    -- Iterate through each item in the inventory
+    for _, item in ipairs(inventory:GetChildren()) do
+        -- Check if the item is a tool
+        if item:IsA("Tool") then
+            -- Equip the tool
+            item.Parent = player.Character
+        end
+    end
+end
+
+-- Example usage of the EquipAllTools function
+
+-- Usage Example: Equip all tools in the player's inventory
+local player = game.Players.LocalPlayer
+EquipAllTools(player)
+end)
+
+
+window:Button("Clear Inventory", function()
+local args = {
+    [1] = "ClearAllTools"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Clea1rTool1s"):FireServer(unpack(args))
+end)
+
+local window = library:Window("Scripts")
+
+window:Label("Player", Color3.fromRGB(127, 143, 166))
+
+-- Function to give a job
+local function giveJob(jobId)
+    local args = {
+        [1] = "GiveJobUIMenu",
+        [2] = jobId,
+        [3] = jobId,
+        [4] = true
+    }
+
+    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Jo1b"):FireServer(unpack(args))
+end
+
+-- List of job IDs
+local jobIds = {
+    "5221907149",
+    "9893355840",
+    "9893743955",
+    "9892927005",
+    "9893355528",
+    "8416982159"
+}
+
+-- Variable to track the loop state
+local isLoopRunning = false
+
+-- Function to give jobs repeatedly with a 1 millisecond delay
+local function giveJobsRepeatedly()
+    while isLoopRunning do
+        for _, jobId in ipairs(jobIds) do
+            giveJob(jobId)
+            wait(0.001)  -- 1 millisecond delay
+        end
+    end
+end
+
+-- Toggle window
+window:Toggle("Loop Jobs", false, function(bool)
+    print(bool)  -- bool is true or false depending on the state of the toggle
+    isLoopRunning = bool  -- Update the loop state based on the toggle value
+    if bool then
+        -- Start the loop when activated
+        spawn(giveJobsRepeatedly)
+    end
+end)
+
+-- This function resets the character by deleting the character's head.
+-- @param player: The player whose character needs to be reset.
+local function resetCharacter(player)
+    -- Check if the player has a character
+    if player.Character then
+        -- Get the character's head
+        local head = player.Character:FindFirstChild("Head")
+        
+        -- Check if the character has a head
+        if head then
+            -- Delete the head
+            head:Destroy()
+        end
+    end
+end
+
+-- Example usage of the resetCharacter function
+
+-- Usage Example: Reset the character of a player
+local player = game.Players.LocalPlayer
+
+-- Create a button in the UI that calls the resetCharacter function when clicked
+local button = window:Button("Reset Character", function()
+    resetCharacter(player)
+end)
+window:Box("Teleport To a Player", function(text, focuslost)
+    if focuslost then
+        -- Find player by username
+        local targetPlayer = game.Players:FindFirstChild(text)
+
+        -- Check if the player with the entered username exists
+        if targetPlayer then
+            -- Teleport the local player to the target player
+            game.Players.LocalPlayer.Character:MoveTo(targetPlayer.Character.HumanoidRootPart.Position)
+        else
+            print("Player not found. Please enter a valid username.")
+        end
+    end
+end)
+
+
+-- Assuming this is a script inside a LocalScript, such as a button inside a UI.
+
+window:Button("Rejoin Server", function()
+    game:GetService("TeleportService"):Teleport(game.PlaceId)
+end)
+
+window:Button("Shutdown GUI", function()
+library:Destroy()
+end)
+
+local window = library:Window("Scripts")
+
+window:Label("Admin Commands", Color3.fromRGB(127, 143, 166))
+
+
+window:Button("Request All Players Piggyback", function()
+local players = game:GetService("Players"):GetPlayers()
+local args = {
+    [1] = "Client2Client",
+    [2] = "Request: Piggyback!"
+}
+
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local remoteEvent = replicatedStorage:WaitForChild("RE"):WaitForChild("1Playe1rTrigge1rEven1t")
+
+for _, player in ipairs(players) do
+    args[3] = player
+    remoteEvent:FireServer(unpack(args))
+end
+end)
+
+window:Label("More Scripts", Color3.fromRGB(127, 143, 166))
+
+window:Button("Credits -vlado1201", function()
+local args1 = {
+    [1] = "PickingRPNameColor",
+    [2] = Color3.new(1, 0, 0.14651918411254883)
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eColo1r"):FireServer(unpack(args1))
+
+wait(5) -- Wait for 5 seconds before executing the next script
+
+-- Second Script
+local args2 = {
+    [1] = "RolePlayName",
+    [2] = "JOIN : \202\156\225\180\155\225\180\155\225\180\152s://\225\180\133\201\170s\225\180\132\225\180\143" ..
+        "\202\128\225\180\133.\201\162\201\162/E\225\180\138B\225\180\135VHGMXT"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args2))
+
+wait(5) -- Wait for another 5 seconds before executing the final script
+
+-- Third Script
+local args3 = {
+    [1] = "RolePlayName",
+    [2] = "s\225\180\156\202\153s\225\180\132\202\128\201\170\202\153\225\180\135 \225\180\160\202\159\225\180\128" ..
+        "\225\180\133\225\180\1431201 \225\180\143\201\180 \202\143\225\180\143\225\180\156\225" ..
+        "\180\155\225\180\156\202\153\225\180\135!"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args3))
+end)
+
+window:Button("Racist Name Bypass", function()
+
+local args = {
+    [1] = "RolePlayName",
+    [2] = "\225\180\139\201\170\202\159\202\159\225\180\128\202\159\202\159\201\180\201\170\201\162\201\162\225" ..
+        "\180\135\202\128s"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+
+local args = {
+    [1] = "PickingRPNameColor",
+    [2] = Color3.new(0.010306358337402344, 0, 1)
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eColo1r"):FireServer(unpack(args))
+end)
+
+local isLoopRunning = false
+
+window:Toggle("Rainbow House", false, function(bool)
+    if bool then
+        if not isLoopRunning then
+            isLoopRunning = true
+            while isLoopRunning do
+                local args = {
+                    [1] = "ColorPickHouse",
+                    [2] = Color3.new(1, 0, 0.7104454040527344)
+                }
+
+                game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Player1sHous1e"):FireServer(unpack(args))
+
+                wait(3)
+
+                local args = {
+                    [1] = "ColorPickHouse",
+                    [2] = Color3.new(0.1624131202697754, 0, 1)
+                }
+
+                game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Player1sHous1e"):FireServer(unpack(args))
+
+                wait(3)
+
+                local args = {
+                    [1] = "ColorPickHouse",
+                    [2] = Color3.new(1, 0.1410263180732727, 0.20900768041610718)
+                }
+
+                game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Player1sHous1e"):FireServer(unpack(args))
+
+                wait(3)
+
+                local args = {
+                    [1] = "ColorPickHouse",
+                    [2] = Color3.new(0.06790179014205933, 1, 0.2612590193748474)
+                }
+
+                game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Player1sHous1e"):FireServer(unpack(args))
+
+                wait(3)
+            end
+        end
+    else
+        isLoopRunning = false
+    end
+end)
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local function executeColorChange(color)
+    local args = {
+        [1] = "PickingRPNameColor",
+        [2] = color
+    }
+    ReplicatedStorage:WaitForChild("RE"):WaitForChild("1RPNam1eColo1r"):FireServer(unpack(args))
+end
+
+local function changeNameAndColor(text)
+    local args = {
+        [1] = "RolePlayName",
+        [2] = text
+    }
+    ReplicatedStorage:WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+end
+
+local function executeScript(text)
+    print(text) -- Print the text entered by the player
+    changeNameAndColor(text) -- Change the name to the entered text
+    while true do -- Loop to change colors indefinitely
+        executeColorChange(Color3.new(1, 0, 0.721808910369873))
+        wait(2)
+        executeColorChange(Color3.new(0.04897451400756836, 0.005994617938995361, 1))
+        wait(2)
+        executeColorChange(Color3.new(1, 0, 0.05202627182006836))
+        wait(2)
+        executeColorChange(Color3.new(0.9947800636291504, 1, 0))
+        wait(2)
+        executeColorChange(Color3.new(0, 1, 0.27944087982177734))
+        wait(2)
+        executeColorChange(Color3.new(0.31060367822647095, 0.8799955248832703, 1))
+        wait(2)
+    end
+end
+
+window:Box("Rainbow Name", function(text, focuslost)
+    if focuslost then
+        executeScript(text) -- Execute the script with the entered text
+    end
+end)
+
+
+local dropdown = window:Dropdown("Get House [045_House}", {"house11", "house12", "house13", "house14", "house15", "house16"}, function(name)
+    if name == "house11" then
+        local args = {
+    [1] = "PickingCustomHouse",
+    [2] = "045_House",
+    [3] = 11
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Gettin1gHous1e"):FireServer(unpack(args))
+    elseif name == "house12" then
+       local args = {
+    [1] = "PickingCustomHouse",
+    [2] = "045_House",
+    [3] = 12
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Gettin1gHous1e"):FireServer(unpack(args))
+    elseif name == "house13" then
+       local args = {
+    [1] = "PickingCustomHouse",
+    [2] = "045_House",
+    [3] = 13
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Gettin1gHous1e"):FireServer(unpack(args))
+ elseif name == "house14" then
+local args = {
+    [1] = "PickingCustomHouse",
+    [2] = "045_House",
+    [3] = 14
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Gettin1gHous1e"):FireServer(unpack(args))
+elseif name == "house15" then
+local args = {
+    [1] = "PickingCustomHouse",
+    [2] = "045_House",
+    [3] = 15
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Gettin1gHous1e"):FireServer(unpack(args))
+elseif name == "house16" then
+local args = {
+    [1] = "PickingCustomHouse",
+    [2] = "045_House",
+    [3] = 16
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Gettin1gHous1e"):FireServer(unpack(args))
+
+    end
+end)
+
+local Noclip = nil
+local Clip = nil
+
+function noclip()
+    Clip = false
+    local function Nocl()
+        if Clip == false and game.Players.LocalPlayer.Character ~= nil then
+            for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+                    v.CanCollide = false
+                end
+            end
+        end
+        wait(0.21) -- basic optimization
+    end
+    Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+end
+
+function clip()
+    if Noclip then
+        Noclip:Disconnect()
+        Noclip = nil
+    end
+    Clip = true
+    -- Reset CanCollide for all parts when clipping is enabled
+    if game.Players.LocalPlayer.Character then
+        for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+            if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+                v.CanCollide = true
+            end
+        end
+    end
+end
+
+-- Function to toggle the state of noclip
+local function toggleNoclip(bool)
+    if bool then
+        noclip()
+        print("Noclip enabled")
+    else
+        clip()
+        print("Noclip disabled")
+    end
+end
+
+-- Function to handle the toggle
+local function toggleHandler(bool)
+    print(bool) -- Output the state of the toggle
+    toggleNoclip(bool) -- Call the function to toggle noclip
+end
+
+-- Creating the toggle (placed at the top)
+window:Toggle("Noclip", false, toggleHandler) -- Initially disabled
+
+local player = game:GetService("Players").LocalPlayer -- Assuming this is a LocalScript
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local function executeLoop(text)
+    local args = {
+        [1] = "Client2Client",
+        [2] = "Request: Piggyback!",
+        [3] = game:GetService("Players"):WaitForChild(text)
+    }
+
+    while true do
+        ReplicatedStorage:WaitForChild("RE"):WaitForChild("1Playe1rTrigge1rEven1t"):FireServer(unpack(args))
+        wait(0.03) -- Wait for 0.03 seconds before the next iteration
+    end
+end
+
+window:Box("Loop Request Shoulders!", function(text, focuslost)
+    if focuslost then
+        executeLoop(text)
+    end
+end)
+
+window:Label("House", Color3.fromRGB(127, 143, 166))
+
+local toggleActivated = false
+
+local actions = {
+    { "Curtains" },
+    { "GarageDoor" }
+}
+
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local houseService = replicatedStorage:WaitForChild("RE"):WaitForChild("1Player1sHous1e")
+
+local function toggleLoop()
+    while toggleActivated do
+        for _, args in ipairs(actions) do
+            houseService:FireServer(unpack(args))
+            wait(0.5) -- Adjust the delay between each action (0.5 seconds in this case)
+        end
+    end
+end
+
+window:Toggle("Loop Windows Garage", false, function(bool)
+    toggleActivated = bool
+    print(bool) -- bool is true or false depending on the state of the toggle
+    if bool then
+        toggleLoop()
+    end
+end)
+
+window:Button("Ban All Players From Your House", function()
+-- Define the command and arguments
+local command = "BanPlayerFromHouse"
+
+-- Get all players in the server
+local players = game:GetService("Players"):GetPlayers()
+
+-- Get the RemoteEvent
+local remoteEvent = game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Playe1rTrigge1rEven1t")
+
+-- Function to execute command on all players with delay
+local function executeCommandOnAllPlayersWithDelay()
+    for i, player in ipairs(players) do
+        wait(i)  -- Wait 'i' seconds before executing the command on the current player
+        remoteEvent:FireServer(command, player, workspace:WaitForChild(player.Name))
+    end
+end
+
+-- Call the function to execute command on all players with delay
+executeCommandOnAllPlayersWithDelay()
+end)
+
+window:Button("Unban All Players From Your House", function()
+-- Define the command and arguments
+local command = "UnBanPlayerFromHouse"
+
+-- Get all players in the server
+local players = game:GetService("Players"):GetPlayers()
+
+-- Get the RemoteEvent
+local remoteEvent = game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Playe1rTrigge1rEven1t")
+
+-- Function to execute command on all players with delay
+local function executeCommandOnAllPlayersWithDelay()
+    for i, player in ipairs(players) do
+        wait(i)  -- Wait 'i' seconds before executing the command on the current player
+        local args = {
+            [1] = command,
+            [2] = player,
+            [3] = workspace:WaitForChild(player.Name)
+        }
+        remoteEvent:FireServer(unpack(args))
+    end
+end
+
+-- Call the function to execute command on all players with delay
+executeCommandOnAllPlayersWithDelay()
+end)
+
+window:Label("More Scripts", Color3.fromRGB(127, 143, 166))
+
+window:Button("Loop Annoying Gun Sound", function()
+local args = {
+    [1] = "PickingTools",
+    [2] = "Glock"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local backpack = player.Backpack
+
+-- Function to equip tools
+local function equipTools()
+    for _, tool in pairs(backpack:GetChildren()) do
+        if tool:IsA("Tool") then
+            tool.Parent = character
+        end
+    end
+end
+
+-- Equip tools when player joins the game
+equipTools()
+
+-- Equip tools when new tools are added to the backpack
+backpack.ChildAdded:Connect(function(child)
+    if child:IsA("Tool") then
+        equipTools()
+    end
+end)
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+while true do
+    local args1 = {
+        [1] = workspace:WaitForChild("Model"):WaitForChild("001_SpawnColor"):WaitForChild("Color1"),
+        [2] = Players.LocalPlayer.Character.Glock.Handle,
+        [3] = Vector3.new(0, 0.22499999403953552, -1),
+        [4] = Vector3.new(-7.1786580085754395, 0.40000152587890625, -16.280378341674805),
+        [5] = Players.LocalPlayer.Character.Glock.GunScript_Local.MuzzleEffect,
+        [6] = Players.LocalPlayer.Character.Glock.GunScript_Local.HitEffect,
+        [7] = 9110842996,
+        [8] = 9110129480,
+        [9] = {
+            [1] = false
+        },
+        [10] = {
+            [1] = 25,
+            [2] = Vector3.new(0.25, 0.25, 100),
+            [3] = BrickColor.new(24),
+            [4] = 0.25,
+            [5] = Enum.Material.SmoothPlastic,
+            [6] = 0.25
+        },
+        [11] = true,
+        [12] = false
+    }
+
+    local args2 = {
+        [1] = game:GetService("Players").LocalPlayer.Character.Glock.Handle,
+        [2] = 9110835734,
+        [3] = 1.3
+    }
+
+    -- Create and configure the sound
+    local sound = Instance.new("Sound")
+    sound.SoundId = "rbxassetid://9110842996" -- Replace with your sound ID
+    sound.Parent = Players.LocalPlayer.Character
+    sound.Volume = 1
+    sound.Looped = false
+    sound:Play()
+
+    -- Play the sound once and remove it when finished
+    sound.Ended:Connect(function()
+        sound:Destroy()
+    end)
+
+    ReplicatedStorage:WaitForChild("RE"):WaitForChild("1Gu1n"):FireServer(unpack(args1))
+    ReplicatedStorage:WaitForChild("RE"):WaitForChild("1Gu1nSound1s"):FireServer(unpack(args2))
+
+    wait(0.1) -- Adjust the delay between each iteration
+end
+end)
+
+window:Box("FE Gun Play Song", function(text, focuslost)
+   if focuslost then
+      local playerInput = tonumber(text) -- Convert input to number
+      if playerInput then
+         local args = {
+            [1] = "ClearAllTools"
+         }
+
+         game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Clea1rTool1s"):FireServer(unpack(args))
+
+         local args = {
+            [1] = "PickingTools",
+            [2] = "Assault"
+         }
+
+         game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Too1l"):InvokeServer(unpack(args))
+
+         local player = game.Players.LocalPlayer
+         local character = player.Character or player.CharacterAdded:Wait()
+         local backpack = player.Backpack
+
+         -- Function to equip tools
+         local function equipTools()
+            for _, tool in pairs(backpack:GetChildren()) do
+               if tool:IsA("Tool") then
+                  tool.Parent = character
+               end
+            end
+         end
+
+         -- Equip tools when player joins the game
+         equipTools()
+
+         -- Equip tools when new tools are added to the backpack
+         backpack.ChildAdded:Connect(function(child)
+            if child:IsA("Tool") then
+               equipTools()
+            end
+         end)
+
+         -- Check if LocalPlayer exists
+         local player = game:GetService("Players").LocalPlayer
+         if player then
+            -- Check if the character and the Assault tool exist
+            local character = player.Character
+            if character then
+               local assault = character:FindFirstChild("Assault")
+               if assault then
+                  local handle = assault:FindFirstChild("Handle")
+                  if handle then
+                     local args = {
+                        [1] = handle,
+                        [2] = playerInput, -- Use player's input here
+                        [3] = 1,
+                        [4] = true -- Indicates that the sound should be audible to the player
+                     }
+
+                     local replicatedStorage = game:GetService("ReplicatedStorage")
+                     local remoteEvent = replicatedStorage:FindFirstChild("RE"):FindFirstChild("1Gu1nSound1s")
+
+                     if remoteEvent then
+                        -- Fire the RemoteEvent with unpacked arguments
+                        remoteEvent:FireServer(unpack(args))
+
+                        -- Play the sound locally for the player executing the script
+                        local sound = Instance.new("Sound")
+                        sound.SoundId = "rbxassetid://" .. args[2]
+                        sound.Parent = game.Workspace
+                        sound.Volume = args[3]
+                        sound:Play()
+
+                        -- Wait for 4 seconds before stopping the sound
+                        wait(4)
+                        sound:Stop()
+
+                        -- Slowing effect
+                        -- Add code here to apply the slowing effect
+                        -- You might want to use RemoteEvents to communicate this with the server and client
+                     else
+                        warn("RemoteEvent '1Gu1nSound1s' not found.")
+                     end
+                  else
+                     warn("Handle not found.")
+                  end
+               else
+                  warn("Assault tool not found.")
+               end
+            else
+               warn("Character not found.")
+            end
+         else
+            warn("LocalPlayer not found.")
+         end
+      else
+         print("Invalid input. Please enter a valid number.")
+      end
+   end
+end)
+
+local args = {
+    [1] = "DropButtonStopAll"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Playe1rTrigge1rEven1t"):FireServer(unpack(args))
+
+library:Keybind("T")
+
+while true do
+  wait(15)
+  game:GetService("StarterGui"):SetCore("SendNotification", {
+  Title = "Remember:",
+  Text = "This script is FE.",
+  Duration = 5
+})wait(10)game:GetService("StarterGui"):SetCore("SendNotification", {
+  Title = "Script cannot be moved?",
+  Text = "Execute again the script.",
+  Duration = 5
+})wait(10)game:GetService("StarterGui"):SetCore("SendNotification", {
+  Title = "PC executors and Android:",
+  Text = "You can use this script in any executor.",
+  Duration = 5
+})wait(10)game:GetService("StarterGui"):SetCore("SendNotification", {
+  Title = "Scripts soon",
+  Text = "More scripts soon...",
+  Duration = 5
+})
+  end
