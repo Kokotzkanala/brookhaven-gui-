@@ -152,7 +152,7 @@ end
             end
 
                 Ringtone(7148332723)
-                chat("im gonna rip you in half now.")
+                chat("Im gonna rip you in half now...")
                 wait(.1)
                 Call()
                 wait(2.3)
